@@ -12,6 +12,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import whisper
 
 app = FastAPI(title="QuickCheck AI Backend")
+print("testing")
 
 app.add_middleware(
     CORSMiddleware,
