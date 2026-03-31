@@ -1,0 +1,193 @@
+:root {
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+}
+
+body {
+  background: #020617;
+  color: #e2e8f0;
+}
+
+.app-shell {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #020617 0%, #0f172a 100%);
+}
+
+.layout-grid {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 320px 1fr;
+}
+
+.sidebar {
+  border-right: 1px solid #1e293b;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.app-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.app-subtitle,
+.tiny-text,
+.panel-label,
+.line-meta {
+  color: #94a3b8;
+  font-size: 0.78rem;
+}
+
+.panel,
+.project-card,
+.transcript-panel,
+.line-card {
+  border: 1px solid #1e293b;
+  background: rgba(15, 23, 42, 0.72);
+  border-radius: 18px;
+}
+
+.panel {
+  padding: 14px;
+}
+
+.control,
+.primary-btn,
+.danger-btn {
+  width: 100%;
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid #334155;
+  font: inherit;
+}
+
+.control {
+  background: #020617;
+  color: #e2e8f0;
+  margin-top: 8px;
+}
+
+.primary-btn {
+  background: #e2e8f0;
+  color: #020617;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.danger-btn {
+  background: #f87171;
+  color: #111827;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.projects-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.project-card {
+  text-align: left;
+  padding: 14px;
+  cursor: pointer;
+}
+
+.project-card.active {
+  background: #e2e8f0;
+  color: #020617;
+}
+
+.project-card.active .tiny-text {
+  color: #334155;
+}
+
+.project-name,
+.main-title {
+  font-weight: 700;
+}
+
+.main-panel {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.main-header,
+.transcript-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-title {
+  font-size: 1.8rem;
+}
+
+.transcript-panel {
+  flex: 1;
+  overflow: hidden;
+}
+
+.transcript-header {
+  padding: 16px 18px;
+  border-bottom: 1px solid #1e293b;
+}
+
+.transcript-stream {
+  height: calc(100vh - 150px);
+  overflow: auto;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.line-card {
+  padding: 12px 14px;
+}
+
+.line-card.partial {
+  border-style: dashed;
+}
+
+.line-card.final {
+  border-color: #334155;
+}
+
+.empty-state {
+  color: #94a3b8;
+}
+
+@media (max-width: 900px) {
+  .layout-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .transcript-stream {
+    height: auto;
+    min-height: 60vh;
+  }
+}

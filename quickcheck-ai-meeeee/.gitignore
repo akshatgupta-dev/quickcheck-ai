@@ -1,0 +1,36 @@
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+backend/.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Node
+node_modules/
+dist/
+frontend/dist/
+frontend/node_modules/
+
+# Data (never commit recordings/transcripts)
+data/
+*.wav
+*.mp3
+*.m4a
+*.webm
+*.ogg
+*.flac
+*.jsonl
+*.sqlite
+*.db
+
+# Env
+.env
