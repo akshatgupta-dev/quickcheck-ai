@@ -86,7 +86,7 @@ def health() -> dict[str, Any]:
         "ok": True,
         "sample_rate": TARGET_SAMPLE_RATE,
         "frame_bytes": FRAME_BYTES,
-        "model": "faster-whisper",
+        "model": "whisper-large-v3",
     }
 
 
@@ -157,7 +157,7 @@ async def run_final_transcription(
         if not text:
             return
 
-        print("RUN FINAL transcription, audio bytes:", len(audio))
+        # print("RUN FINAL transcription, audio bytes:", len(audio))
         print("FINAL text:", repr(text))
 
         SESSIONS.setdefault(state.session_id, {}).setdefault(project_id, []).append(
@@ -194,7 +194,7 @@ async def flush_utterance(ws: WebSocket, state: SessionState, *, force: bool = F
     project_id = state.project_id
     seq = state.seq
 
-    print("FLUSH utterance frames:", len(state.utterance_frames), "force:", force)
+    # print("FLUSH utterance frames:", len(state.utterance_frames), "force:", force)
 
     state.transcribe_generation += 1
     generation = state.transcribe_generation
@@ -215,7 +215,7 @@ async def flush_utterance(ws: WebSocket, state: SessionState, *, force: bool = F
 async def process_frame(ws: WebSocket, state: SessionState, frame: bytes) -> None:
     vad = ws.state.vad
     is_speech = vad.is_speech(frame)
-    print("is_speech:", is_speech, "speech_active:", state.speech_active, "frame len:", len(frame))
+    # print("is_speech:", is_speech, "speech_active:", state.speech_active, "frame len:", len(frame))
 
     state.pre_roll.append(frame)
 
@@ -317,7 +317,7 @@ async def handle_control_message(ws: WebSocket, state: SessionState, message: di
 
 
 async def handle_audio_message(ws: WebSocket, state: SessionState, raw_message: bytes) -> None:
-    print("raw audio packet len:", len(raw_message))
+    # print("raw audio packet len:", len(raw_message))
 
     if len(raw_message) < 4:
         print("packet too small")
@@ -332,8 +332,8 @@ async def handle_audio_message(ws: WebSocket, state: SessionState, raw_message: 
     metadata = json.loads(raw_message[4:metadata_end].decode("utf-8"))
     chunk = raw_message[metadata_end:]
 
-    print("metadata:", metadata)
-    print("chunk len:", len(chunk))
+    # print("metadata:", metadata)
+    # print("chunk len:", len(chunk))
 
     if not chunk:
         print("empty chunk")
@@ -347,8 +347,8 @@ async def handle_audio_message(ws: WebSocket, state: SessionState, raw_message: 
     frames, remainder = split_frames(state.frame_remainder + resampled)
     state.frame_remainder = remainder
 
-    print("resampled len:", len(resampled))
-    print("frames count:", len(frames), "remainder len:", len(remainder))
+    # print("resampled len:", len(resampled))
+    # print("frames count:", len(frames), "remainder len:", len(remainder))
 
     for frame in frames:
         await process_frame(ws, state, frame)
